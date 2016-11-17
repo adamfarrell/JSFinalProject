@@ -2,6 +2,35 @@ doctype html
 html
   head
     title= title
+    link(rel="stylesheet", href="/stylesheets/vendor/foundation.min.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block styles
   body
-    block content
+    section(id='navbar')
+      div(class='top-bar')
+        div(class='row')
+          div(class='top-bar-left')
+            ul(class='menu')
+              li(class='menu-text')|ListMaster 4000
+              li
+                a(href="/")|Home
+              li
+                a(href="/list")|Create List
+    section(id='content')
+      block content
+    section(id='footer')
+      div(class='row')
+        ul(class='menu')
+          li
+            a(href="#")|About
+          li
+            a(href="#")|Contact
+          li
+            a(href="#")|FAQ
+          li
+            a(href="#")|Blog
+    script(src='/javascripts/vendor/jquery.js')
+    script(src='/javascripts/vendor/what-input.js')
+    script(src='/javascripts/vendor/foundation.min.js')
+    block scripts
+    

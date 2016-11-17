@@ -1,8 +1,45 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #475047;
+  background-color: #475047
 }
 
-a {
-  color: #00B7FF;
+h2 {
+  border-bottom: 2px solid #2199e8;
+}
+
+section#navbar {
+  color: #fafafa;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+}
+
+.top-bar,
+.top-bar ul {
+  background-color: #475047;
+}
+
+section#content {
+  padding: 1em;
+  background-color: #fafafa;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-width: 80em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section#footer {
+  background-color: #475047;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+}
+
+.row {
+  max-width: 80em!important;
 }
