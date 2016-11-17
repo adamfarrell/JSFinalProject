@@ -9,7 +9,7 @@ module.exports = function(app) {
 			for (let i = 0; i < files.length; i++) {
 				const controllerName = files[i].substr(0, files[i].lastIndexOf('.'));
 
-				if(controllerName === 'index')
+				if(controllerName === 'home')
 					app.use('/', require(`../routes/${controllerName}`));
 				app.use(`/${controllerName}`, require(`../routes/${controllerName}`));
 			}
