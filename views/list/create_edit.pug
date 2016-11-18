@@ -1,0 +1,12 @@
+extends ../layout
+
+block menu-options
+	li
+		a(href='/')|Home
+	li.active
+		a(href='/list')|Lists
+
+block content
+	input(type='text', placeholder='Your List Name Here', value=listName) 
+
+

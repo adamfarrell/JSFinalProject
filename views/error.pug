@@ -1,0 +1,12 @@
+extends layout
+
+block menu-options
+	li
+		a(href="/")|Home
+	li
+		a(href="/list")|Lists
+
+block content
+	h1= message
+	h2= error.status
+	pre #{error.stack}
