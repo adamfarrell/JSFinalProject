@@ -2,19 +2,37 @@ extends ../layout
 
 block menu-options
 	li
-		a(href="/")|Home
-	li(class='active')
-		a(href="/list")|Lists
+		a(href='/')|Home
+	li.active
+		a(href='/list')|Lists
 
 block sub-navbar
 	section(id='sub-navbar')
-		div(class='top-bar')
-			div(class='row')
-				div(class='top-bar-left')
-					ul(class='menu')
+		div.row
+			div.top-bar
+				div.top-bar-left
+					ul.menu
 						li
-							a(href="/list/create")|Create List
+							a(href='/list/create')|Create List
 
 block content 
 	h1= title
-	p Welcome to #{title}
+	//- p #{list[0]._id}
+	case list.length
+		when 0
+			h3.info You haven't made any lists yet. Click 'Create List' in the navbar to get organizing!
+		default
+			ul.items
+				for item in list
+					li(data-bind='click: editList')= item.title
+			//- ul.items(data-bind='foreach: lists')
+			//- 	li(data-bind='text: title')
+
+block scripts
+	script(src='/javascripts/lists.js')
+	//- script.
+	//- 	const lists = [ #{list} ];
+	//- 	const viewModel = {
+	//- 		observableLists: ko.observableArray(lists)
+	//- 	};
+	//- 	ko.applyBindings(viewModel);
