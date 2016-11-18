@@ -84,3 +84,8 @@ ul.items li:nth-last-of-type(odd) {
 .info {
   color: #2199e8;
 }
+
+a.button {
+  margin-bottom: 0;
+  margin-left: 5em;
+}
