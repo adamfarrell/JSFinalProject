@@ -22,17 +22,27 @@ block content
 		when 0
 			h3.info You haven't made any lists yet. Click 'Create List' in the navbar to get organizing!
 		default
-			ul.items
-				for item in list
-					li(data-bind='click: editList')= item.title
-			//- ul.items(data-bind='foreach: lists')
-			//- 	li(data-bind='text: title')
+			ul.items(data-bind='foreach: observableLists')
+				li(data-bind='click: editList')
+					span(data-bind='text: title')
+					a.button.alert.expand(data-bind='click: deleteList') Delete List
+
+								//- ul.items
+								//- 	for item in list
+								//- 		li(data-bind='click: editList', id=item._id)= item.title
+			
 
 block scripts
+	script.
+		const lists = [ #{list} ];
+		function editListPage(id) {
+			window.location.href = '/list/edit/' + id;
+		}
+		function deleteListPage(id) {
+			$.ajax({
+				type: 'POST',
+				url: '/list/api/delete',
+				data: { id }
+			});
+		}
 	script(src='/javascripts/lists.js')
-	//- script.
-	//- 	const lists = [ #{list} ];
-	//- 	const viewModel = {
-	//- 		observableLists: ko.observableArray(lists)
-	//- 	};
-	//- 	ko.applyBindings(viewModel);
