@@ -1,39 +1,36 @@
-extends ../layout
-
-block menu-options
-	li
-		a(href='/')|Home
+extends layout
+block submenu-options
 	li.active
-		a(href='/list')|Lists
-
-block sub-navbar
-	section(id='sub-navbar')
-		div.row
-			div.top-bar
-				div.top-bar-left
-					ul.menu
-						li
-							a(href='/list/create')|Create List
-
-block content 
+		a(href='/list')|View Lists
+	li
+		a(href='/list/create')|Create List
+block content
+	div#responseContainer
+		div.row#response(style="display: none")
+			div.warning.callout(data-closable)
+				h5 Confirm Delete
+				p#responseMsg
+				div.button-group
+					a.button.secondary(data-close) Cancel
+					a.button.alert(data-bind='click: deleteList', data-close) Delete
+				button.close-button(aria-label='Dismiss Alert' type='button' data-close)
+					span(aria-hidden='true') &times;
 	h1= title
-	//- p #{list[0]._id}
-	case list.length
-		when 0
-			h3.info You haven't made any lists yet. Click 'Create List' in the navbar to get organizing!
-		default
-			ul.items(data-bind='foreach: observableLists')
-				li(data-bind='click: editList')
-					span(data-bind='text: title')
-					a.button.alert.expand(data-bind='click: deleteList') Delete List
-
-								//- ul.items
-								//- 	for item in list
-								//- 		li(data-bind='click: editList', id=item._id)= item.title
+	hr.listBreak
+	ul.items(data-bind='foreach: observableLists')
+		li(data-bind='click: editList')
+			a.button.alert(data-bind='click: confirmDeleteList, clickBubble: false') Delete List
+			span(data-bind='text: title')
+	div(data-bind='if: observableLists().length == 0')
+		h3.info You have no lists. Click 'Create List' in the navbar to get organizing!
 			
-
 block scripts
 	script.
+		const callout = $('#response .callout');
+		callout.toggle('close', function() {
+			$('#response').show();
+		});
+		
 		const lists = [ #{list} ];
 		function editListPage(id) {
 			window.location.href = '/list/edit/' + id;
@@ -44,5 +41,10 @@ block scripts
 				url: '/list/api/delete',
 				data: { id }
 			});
+		}
+		function askForConfirmation(data, list) {
+			const message = 'Would you really like to delete the list: ' + list.title + '?';
+			$('#responseMsg').text(message);
+			callout.toggle('close');
 		}
 	script(src='/javascripts/lists.js')
