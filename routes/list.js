@@ -39,6 +39,7 @@ router.post('/api/delete', (req, res, next) => {
 	const id = req.body.id;
 	Promise.resolve()
 	.then(() => model.remove({ _id: id }))
+	.then(res.send({ status: 'Delete Success' }))
 	.catch(err => next(err));
 });
 
@@ -56,7 +57,7 @@ router.post('/api/save', (req, res, next) => {
 		Promise.resolve()
 		.then(() => newList.save(err => {
 			if (err)
-				console.log(err);
+				next(err);
 		}))
 		.then(res.send({ status: 'Save Success', id: newId }))
 		.catch(err => next(err));
