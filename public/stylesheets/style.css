@@ -1,91 +1,206 @@
 body {
-  color: #545f54;
-  background-color: #606c60
+    color: #545f54;
+    background-color: #606c60
 }
 
 h2 {
-  border-bottom: 2px solid #2199e8;
+    border-bottom: 2px solid #2199e8;
+}
+
+hr.listBreak {
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+li.menu-text {
+    color: #fafafa!important;
+}
+
+li.menu-text:hover {
+    background-color: #545f54!important;
+    color: #fafafa;
+}
+
+div#responseContainer {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    top: 54px;
+    left: 0;
 }
 
 section#navbar,
 section#sub-navbar {
-  color: #fafafa;
-  position: fixed;
-  height: 54px;
-  width: 100%;
+    color: #fafafa;
+    position: fixed;
+    height: 54px;
+    width: 100%;
+}
+
+section#navbar li {
+    color: #2199e8;
+}
+
+section#navbar li.active {
+    background-color: #2199e8;
+    color: #fafafa;
+}
+
+section#navbar li:hover {
+    background-color: #2199e8;
+    color: #fafafa;
+}
+
+section#navbar li a {
+    color: inherit;
 }
 
 section#navbar {
-  top: 0;
-  left: 0;
+    top: 0;
+    left: 0;
 }
 
 section#sub-navbar {
-  top: 54px;
-  left: 0;
+    top: 54px;
+    left: 0;
 }
 
 section#navbar .top-bar,
 section#navbar .top-bar ul {
-  background-color: #545f54;
+    background-color: #545f54;
 }
 
 section#sub-navbar .top-bar,
 section#sub-navbar .top-bar ul {
-  background-color: #606c60;
+    /*background-color: #606c60;*/
+    /*background-color: #fafafa;*/
+    background-color: #2199e8;
+}
+
+section#sub-navbar .top-bar ul li {
+    color: #fafafa;
+}
+
+section#sub-navbar .top-bar ul li.active {
+    color: #2199e8;
+    background-color: #fafafa;
+}
+
+section#sub-navbar .top-bar ul li:hover,
+section#sub-navbar .top-bar ul li.active:hover {
+    color: #2199e8;
+    background-color: #fafafa;
+}
+
+section#sub-navbar .top-bar ul li a,
+section#sub-navbar .top-bar ul li:active a {
+    color: inherit;
+    background-color: inherit;
+}
+
+.top-bar {
+    padding: 0;
 }
 
 section#content {
-  padding: 1em;
-  background-color: #fafafa;
-  margin-top: 54px;
-  margin-bottom: 40px;
-  max-width: 62.5em;
-  margin-left: auto;
-  margin-right: auto;
+    padding: 1em;
+    background-color: #fafafa;
+    margin-top: 54px;
+    margin-bottom: 40px;
+    max-width: 62.5em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-section#sub-navbar + section#content {
-  margin-top: 108px;
-} 
+section#sub-navbar+section#content {
+    margin-top: 108px;
+}
 
 section#footer {
-  background-color: #545f54;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 40px;
+    background-color: #545f54;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 40px;
 }
 
 .row {
-  max-width: 62.5em!important;
+    max-width: 62.5em!important;
 }
 
 ul.items {
-  list-style: none;
-  margin: 0 -1em;
+    list-style: none;
+    margin: 0 -1em;
+}
+
+hr + ul.items {
+    margin: -20px -1em;
 }
 
 ul.items li {
-  padding: .5em;
-  font-size: 1.25em;
+    padding: .5em;
+    font-size: 1.25em;
 }
 
 ul.items li:hover {
-   background-color: #2199e8!important;
-   color: #fafafa;
+    background-color: #2199e8!important;
+    color: #fafafa;
 }
 
 ul.items li:nth-last-of-type(odd) {
-  background-color: #e6e6e6;
+    background-color: #e6e6e6;
 }
 
-.info {
-  color: #2199e8;
+h3.info {
+    color: #2199e8;
+    padding-top: 20px;
 }
 
 a.button {
-  margin-bottom: 0;
-  margin-left: 5em;
+    margin-bottom: 0;
+    margin-right: 2.5em;
+}
+
+a.item-btn {
+    margin-bottom: 0;
+    margin-right: 0;
+}
+
+input.item-input {
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    background-color: transparent;
+    font-size: 1em;
+}
+
+.item-input:hover,
+.title-input:hover {
+    background-color: #fafafa;
+    border: 1px solid #8a8a8a;
+}
+
+input.title-input {
+    margin: 0;
+    font-size: 1.25em;
+}
+
+input {
+    color: #545f54!important;
+}
+
+ul.menu > li {
+    padding: .5rem;
+}
+
+@media all and (min-width: 40em) {
+    input.title-input {
+        font-size: 1.75em;
+    }
+
+    input.item-input {
+        font-size: 1.25em;
+    }
 }

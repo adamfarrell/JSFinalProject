@@ -6,12 +6,15 @@ html
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		block styles
 	body
-		section(id='navbar')
-			div(class='top-bar')
-				div(class='row')
-					div(class='top-bar-left')
-						ul(class='menu')
-							li(class='menu-text')|ListMaster 4000
+		section#navbar
+			div.top-bar
+				div.row
+					div.top-bar-left
+						ul.menu
+							li.menu-text
+								a(href='/')|ListMaster 4000
+					div.top-bar-right
+						ul.menu
 							block menu-options
 		block sub-navbar
 		section(id='content')

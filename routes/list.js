@@ -22,7 +22,7 @@ router.get('/index', (req, res, next) => {
 });
 
 router.get('/create', (req, res, next) => {
-	res.render('list/create_edit', { title: 'New List' });
+	res.render('list/create_edit', { title: 'New List', listItems: [], listTitle: '', listId: '' });
 });
 
 router.get('/edit/:id', (req, res, next) => {
@@ -30,17 +30,37 @@ router.get('/edit/:id', (req, res, next) => {
 	Promise.resolve()
 	.then(() => model.findOne({ _id: listId }))
 	.then(list => {
-		res.render('list/create_edit', { title: list.title, list, listName: list.title });
+		res.render('list/create_edit', { title: list.title, listItems: list.items, listTitle: list.title, listId: list._id });
 	})
 	.catch(err => next(err));
 });
 
 router.post('/api/delete', (req, res, next) => {
-	console.log('trying to delete');
 	const id = req.body.id;
 	Promise.resolve()
 	.then(() => model.remove({ _id: id }))
 	.catch(err => next(err));
+});
+
+router.post('/api/save', (req, res, next) => {
+	const list = JSON.parse(req.body.list);
+	if(list._id !== '') {
+		const query = { _id: list._id };
+		Promise.resolve()
+		.then(() => model.findOneAndUpdate(query, { title: list.title, items: list.items }))
+		.then(res.send('Save Success'))
+		.catch(err => next(err));
+	} else {
+		const newId = mongoose.Types.ObjectId().toString();
+		const newList = new model({ _id: newId, title: list.title, items: list.items });
+		Promise.resolve()
+		.then(() => newList.save(err => {
+			if (err)
+				console.log(err);
+		}))
+		.then(res.send({ status: 'Save Success', id: newId }))
+		.catch(err => next(err));
+	}
 });
 
 module.exports = router;
