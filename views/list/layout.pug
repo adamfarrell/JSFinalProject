@@ -1,0 +1,14 @@
+extends ../layout
+
+block menu-options
+	li
+		a(href='/')|Home
+	li.active
+		a(href='/list')|Lists
+block sub-navbar
+	section(id='sub-navbar')
+		div.row
+			div.top-bar
+				div.top-bar-left
+					ul.menu
+						block submenu-options

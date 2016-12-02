@@ -1,12 +1,61 @@
-extends ../layout
-
-block menu-options
+extends layout
+block submenu-options
 	li
-		a(href='/')|Home
+		a(href='/list')|View Lists
 	li.active
-		a(href='/list')|Lists
-
+		a(href='/list/create')|Create List
 block content
-	input(type='text', placeholder='Your List Name Here', value=listName) 
+	div#responseContainer
+		div.row#response
+	div.row.small-collapse(style='margin-left: -16px; margin-right: -16px; margin-top: -16px;')
+		div.small-8.medium-10.columns
+			input.title-input(type='text', placeholder='Your List Name Here', value=listTitle, id='listTitle', style='margin-bottom: 0;', data-bind='textInput: listTitle')
+		div.small-4.medium-2.columns
+			a.button.expanded(data-bind='click: saveList', style='margin-bottom: 0;') Save
+	ul.items(data-bind='foreach: observableItems')
+				li
+					.row
+						.small-4.medium-2.large-1.columns
+							a.button.alert.item-btn(data-bind='click: deleteItem') Delete
+						.small-8.medium-10.large-11.columns
+							input.item-input(type='text', data-bind='textInput: content')
+	div.row.small-collapse(style='margin-left: -16px; margin-right: -16px; margin-bottom: -16px;')
+		div.small-8.medium-10.columns
+			input(type='text', placeholder='New Item', data-bind='textInput: newItem, event: { keypress: enterAddItem }', style='margin-bottom: 0;')
+		div.small-4.medium-2.columns
+			a.button.expanded(data-bind='click: addItem', style='margin-bottom: 0;') Add
+block scripts
+	script.
+		const listItems = [ #{listItems} ];
+		let listId =  '#{listId}';
+		const title = '#{listTitle}';
+		function displayResponse(data) {
+			let message;
+			let calloutType;
+			switch(data) {
+				case 'Save Success':
+					calloutType = 'success';
+					message = '<p>You have successfully saved your list. You may navigate away from the page at this time, or make additional changes. Be sure to save any additional changes though!</p>';
+					break;
+				case 'Invalid Text Input':
+					calloutType = 'alert';
+					message = '<p>List items and title must not be empty, and must not start with a space character. They also must be less than or equal to 50 characters long.</p>';
+					break;
+				default: 
+					break;
+			}
 
+			$('#response').fadeIn(0);
 
+			$('#response').html(
+				'<div class="'+ calloutType + ' callout" data-closable>' +
+					'<h5>' + data + '</h5>' +
+					message +
+					'<button class="close-button" aria-label="Dismiss alert" type="button" data-close>' +
+						'<span aria-hidden="true">&times;</span>' +
+					'</button>' +
+				'</div>'
+			);
+			setTimeout(() => $('#response').fadeOut(750), 3500);
+		}
+	script(src='/javascripts/create_edit.js')
