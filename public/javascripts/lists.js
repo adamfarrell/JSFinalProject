@@ -10,7 +10,6 @@ function ViewModel() {
 		askForConfirmation('Confirm Delete', list_item);
 	};
 	self.deleteList = function() {
-		console.log(self.possiblyDoomedList);
 		self.observableLists.remove(self.possiblyDoomedList);
 		deleteListPage(self.possiblyDoomedList._id);
 	};

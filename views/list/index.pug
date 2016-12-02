@@ -6,7 +6,7 @@ block submenu-options
 		a(href='/list/create')|Create List
 block content
 	div#responseContainer
-		div.row#response(style='display: none;')
+		div.row#response(style="display: none")
 			div.warning.callout(data-closable)
 				h5 Confirm Delete
 				p#responseMsg
@@ -26,6 +26,11 @@ block content
 			
 block scripts
 	script.
+		const callout = $('#response .callout');
+		callout.toggle('close', function() {
+			$('#response').show();
+		});
+		
 		const lists = [ #{list} ];
 		function editListPage(id) {
 			window.location.href = '/list/edit/' + id;
@@ -40,6 +45,6 @@ block scripts
 		function askForConfirmation(data, list) {
 			const message = 'Would you really like to delete the list: ' + list.title + '?';
 			$('#responseMsg').text(message);
-			$('#response').show();
+			callout.toggle('close');
 		}
 	script(src='/javascripts/lists.js')
